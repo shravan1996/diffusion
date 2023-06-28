@@ -2,7 +2,6 @@
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
-
 export default function Page2(){
 
     const navigate = useNavigate();
@@ -21,12 +20,8 @@ export default function Page2(){
                 
                 <Button onClick={toPage1} variant="outlined" style={{color:'#7E96EA'}}>Back</Button>
 
-           </div>
-
-                   
+           </div>   
                
-
-
         </div>
 
     ) 
