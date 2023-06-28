@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, request, jsonify, send_file
 import io
 import torch
 from torch import autocast
@@ -16,12 +16,14 @@ def run_inference(prompt):
   image.save(img_data, "PNG")
   img_data.seek(0)
   return img_data
-@app.route('/')
+@app.route('/api/search', method = ['POST'])
 def myapp():
-    if "prompt" not in request.args:
-        return "Please specify a prompt parameter", 400
-    prompt = request.args["prompt"]
+    #if "prompt" not in request.args:
+    #    return "Please specify a prompt parameter", 400
+    data = request.get_json()
+    prompt = data.get('query')
     img_data = run_inference(prompt)
     return send_file(img_data, mimetype='image/png')
+
 
 
