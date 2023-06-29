@@ -2,16 +2,16 @@ import Button from '@mui/material/Button';
 // import { SearchIcon } from '@heroicons/react/solid';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Page2 from '../Page2/index.js';
+import { Page2 } from './Page2/index.js';
 
 export default function Page1(){
    
-   // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [query, setQuery] = useState('');
     const [imageSrc, setImageSrc] = useState('');
     
     const handleSearch = () => {
-    // navigate('/page-2');
+      navigate('/page-2');
       fetch('/api/search', {
         method: 'POST',
         headers: {
@@ -23,19 +23,14 @@ export default function Page1(){
         .then((blob) => {
           const src = URL.createObjectURL(blob);
           setImageSrc(src);
-          
-	  //callback(imageSrc);
           // Handle the response data from the Flask backend
           console.log("successful");
-	  return <Page2 image = {imageSrc} />
         })
         .catch((error) => {
           // Handle any errors
           console.error(error);
         });
     };     
-
-    //Page2(imageSrc);	
 
     return(
         <div className="flex flex-col p-[20px]" >
@@ -54,21 +49,21 @@ export default function Page1(){
                             <input
                                 className="w-[800px] border-[#080707]  pl-3 py-2 pr-10 border-[1px] rounded-lg  focus:outline-none"
                                 type="text"
-		                value={query}
-		 	        onChange={(e) => setQuery(e.target.value)}
+				                        value={query}
+				                        onChange={(e) => setQuery(e.target.value)}
                                 placeholder="Search"
                             />                       
                     </div>
                    
                         <Button  onClick={handleSearch} variant="contained" style={{backgroundColor:'#7E96EA'}}>Get Image</Button> 
                 </div>
-		<div>
-			 <img src={imageSrc} alt="imageSrc" />
-		</div>
+            </div>
+            <div>
+                <img src={imageSrc} alt="imageSrc" />
             </div>
 
         </div>
 
     ) 
-   
+    callback(i
 }
