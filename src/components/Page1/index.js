@@ -6,12 +6,18 @@ import Page2 from '../Page2/index.js';
 
 export default function Page1(){
    
-   // const navigate = useNavigate();
+   const navigate = useNavigate();
     const [query, setQuery] = useState('');
     const [imageSrc, setImageSrc] = useState('');
-    
+  
+     useEffect(()=>{
+        if (imageSrc !== ''){
+              console.log({imageSrc},"from Page1.2");
+	      navigate('/page-2',{state:imageSrc});     
+        }
+        },[imageSrc]); 
+ 
     const handleSearch = () => {
-    // navigate('/page-2');
       fetch('/api/search', {
         method: 'POST',
         headers: {
@@ -26,14 +32,15 @@ export default function Page1(){
           
 	  //callback(imageSrc);
           // Handle the response data from the Flask backend
-          console.log("successful");
-	  return <Page2 image = {imageSrc} />
-        })
+        console.log({imageSrc},"from Page1");
+	
+	})
         .catch((error) => {
           // Handle any errors
           console.error(error);
         });
     };     
+   
 
     //Page2(imageSrc);	
 
@@ -62,11 +69,7 @@ export default function Page1(){
                    
                         <Button  onClick={handleSearch} variant="contained" style={{backgroundColor:'#7E96EA'}}>Get Image</Button> 
                 </div>
-		<div>
-			 <img src={imageSrc} alt="imageSrc" />
-		</div>
-            </div>
-
+	</div>
         </div>
 
     ) 
